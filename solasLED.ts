@@ -108,6 +108,6 @@ namespace servers {
         }
     }
 
-    //% fixedInstance whenUsed block="buzzer"
+    //% fixedInstance whenUsed block="led"
     export const ledServer = new LEDServer()
 }

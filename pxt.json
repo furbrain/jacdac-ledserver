@@ -17,12 +17,5 @@
     "testFiles": [
         "test.ts"
     ],
-    "targetVersions": {
-        "target": "3.1.79",
-        "targetId": "solas"
-    },
-    "supportedTargets": [
-        "solas"
-    ],
     "preferredEditor": "tsprj"
 }
