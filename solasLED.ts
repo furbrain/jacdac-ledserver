@@ -95,9 +95,9 @@ namespace servers {
             const [red, green, blue] =
                 pkt.jdunpack<[number, number, number]>("u16 u16 u16")
             if (red == 0) {
-                pins.LED.digitalWrite(false)
+                pins.PIN_15.digitalWrite(false)
             } else {
-                pins.LED.digitalWrite(true)
+                pins.PIN_15.digitalWrite(true)
             }
         }
     }
