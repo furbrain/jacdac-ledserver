@@ -81,7 +81,7 @@ namespace servers {
 		{
             // registers
             this.handleRegValue(pkt,LedReg.LedCount,"u16",1) 
-            this.handleRegValue(pkt,LedReg.Color,"u8 u8 u8",[20,30,40]) 
+            this.handleRegFormat(pkt,LedReg.Color,"u8 u8 u8",[20,30,40]) 
             this.handleRegValue(pkt,LedReg.Variant,"u8",this.variant) 
 
             // commands
