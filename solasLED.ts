@@ -1,3 +1,7 @@
+//combo of https://github.com/microsoft/pxt-jacdac/blob/master/led/constants.ts
+// and https://github.com/microsoft/pxt-jacdac/blob/master/devices/microbit/microbitBuzzer.ts
+
+
 namespace servers {
     // Service LED constants
     export const SRV_LED = 0x1e3048f8
@@ -13,7 +17,8 @@ namespace servers {
         Bead = 0x4,
     }
 
-    export const enum LedCmd {
+    export const enum LedCmd 
+	{
         /**
          * This has the same semantics as `set_status_light` in the control service.
          *
@@ -24,7 +29,17 @@ namespace servers {
         Animate = 0x80,
     }
 
-    export const enum LedReg {
+    export const enum LedReg 
+	{
+		/**
+         * The current color of the LED.
+         *
+         * ```
+         * const [red, green, blue] = jdunpack<[number, number, number]>(buf, "u8 u8 u8")
+         * ```
+         */
+        Color = 0x180,		
+		
         /**
          * Constant uint16_t. If known, specifies the number of LEDs in parallel on this device.
          *
@@ -53,35 +68,27 @@ namespace servers {
         Variant = 0x107,
     }
 
-    export class LEDServer extends jacdac.Server {
+    export class LEDServer extends jacdac.Server 
+	{
         variant: LedVariant = LedVariant.SMD
+		red: int=0
+		green: int=0
+		blue: int=0
+		
         constructor() {
             super("led", SRV_LED)
         }
 
-        public handlePacket(pkt: jacdac.JDPacket) {
+        public handlePacket(pkt: jacdac.JDPacket) 
+		{
             // registers
-            this.handleRegValue(
-                 pkt,
-                 LedReg.LedCount,
-                 "u16",
-                 1
-                ) 
-            this.handleRegValue(
-                 pkt,
-                 LedReg.WaveLength,
-                 "u16",
-                 650
-                ) 
-            this.handleRegValue(
-                 pkt,
-                 LedReg.Variant,
-                 "u8",
-                 this.variant
-                ) 
+            this.handleRegValue(pkt,LedReg.LedCount,"u16",1) 
+            this.handleRegValue(pkt,LedReg.Color,"u8 u8 u8",[20,30,40]) 
+            this.handleRegValue(pkt,LedReg.Variant,"u8",this.variant) 
 
             // commands
-            switch (pkt.serviceCommand) {
+            switch (pkt.serviceCommand) 
+			{
                 case LedCmd.Animate:
                     this.handleAnimateCommand(pkt)
                     break
@@ -91,12 +98,17 @@ namespace servers {
             }
         }
 
-        private handleAnimateCommand(pkt: jacdac.JDPacket) {
+        private handleAnimateCommand(pkt: jacdac.JDPacket) 
+		{			
             const [red, green, blue] =
                 pkt.jdunpack<[number, number, number]>("u16 u16 u16")
-            if (red == 0) {
+						
+			light.setAll(light.rgb(red, green, blue))
+            if (red == 0) 
+			{
                 pins.P15.digitalWrite(false)
-            } else {
+            } else 
+			{
                 pins.P15.digitalWrite(true)
             }
         }
