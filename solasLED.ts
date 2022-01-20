@@ -54,7 +54,7 @@ namespace servers {
     }
 
     export class LEDServer extends jacdac.Server {
-        variant: LedVariant = LEDVariant.SMD
+        variant: LedVariant = LedVariant.SMD
         constructor() {
             super("led", SRV_LED)
         }
