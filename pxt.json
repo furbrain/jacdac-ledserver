@@ -4,8 +4,6 @@
     "description": "Jacdac servers for solas",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "microphone": "*",
         "jacdac": "github:microsoft/pxt-jacdac",
         "jacdac-servers": "github:microsoft/pxt-jacdac/servers"
     },
