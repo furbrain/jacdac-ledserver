@@ -7,6 +7,6 @@ namespace servers {
     export function startAll() {
         jacdac.startServer()
         servers.ledServer.start()
-        })
+        }
     }
 }
