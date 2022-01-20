@@ -38,7 +38,7 @@ namespace servers {
          * const [red, green, blue] = jdunpack<[number, number, number]>(buf, "u8 u8 u8")
          * ```
          */
-        Color = 0x180,		
+        //Color = 0x180,		
 		
         /**
          * Constant uint16_t. If known, specifies the number of LEDs in parallel on this device.
@@ -81,7 +81,7 @@ namespace servers {
 		{
             // registers
             this.handleRegValue(pkt,LedReg.LedCount,"u16",1) 
-            this.handleRegFormat(pkt,LedReg.Color,"u8 u8 u8",[20,30,40]) 
+            //this.handleRegFormat(pkt,LedReg.Color,"u8 u8 u8",[20,30,40]) 
             this.handleRegValue(pkt,LedReg.Variant,"u8",this.variant) 
 
             // commands
