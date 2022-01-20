@@ -63,25 +63,19 @@ namespace servers {
             // registers
             this.handleRegValue(
                  pkt,
-                 LedReg.MaxPower,
-                 "u16",
-                 20
-                ) 
-            this.handleRegValue(
-                 pkt,
                  LedReg.LedCount,
                  "u16",
                  1
                 ) 
             this.handleRegValue(
                  pkt,
-                 LedReg.Wavelength,
+                 LedReg.WaveLength,
                  "u16",
                  650
                 ) 
             this.handleRegValue(
                  pkt,
-                 LedReg.MaxPower,
+                 LedReg.Variant,
                  "u8",
                  this.variant
                 ) 
