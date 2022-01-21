@@ -80,9 +80,13 @@ namespace servers {
         public handlePacket(pkt: jacdac.JDPacket) 
 		{
             // registers
-            this.handleRegValue(pkt,LedReg.LedCount,"u16",1) 
+            
+			//how many leds
+			this.handleRegValue(pkt,LedReg.LedCount,"u16",1) 
             //this.handleRegFormat(pkt,LedReg.Color,"u8 u8 u8",[20,30,40]) 
-            this.handleRegValue(pkt,LedReg.Variant,"u8",this.variant) 
+            
+			//through pin or surface mount?
+			this.handleRegValue(pkt,LedReg.Variant,"u8",this.variant) 
 
             // commands
             switch (pkt.serviceCommand) 
@@ -98,14 +102,15 @@ namespace servers {
 
         private handleAnimateCommand(pkt: jacdac.JDPacket) 
 		{			
-            const [red, green, blue] =
-                pkt.jdunpack<[number, number, number]>("u8 u8 u8")
+            const [red, green, blue, speed] =
+                pkt.jdunpack<[number, number, number, number]>("u8 u8 u8 u8")
 						
 			light.setAll(light.rgb(red, green, blue))
             if (red == 0) 
 			{
                 pins.P15.digitalWrite(false)
-            } else 
+            } 
+			else 
 			{
                 pins.P15.digitalWrite(true)
             }
