@@ -99,7 +99,7 @@ namespace servers {
         private handleAnimateCommand(pkt: jacdac.JDPacket) 
 		{			
             const [red, green, blue] =
-                pkt.jdunpack<[number, number, number]>("u16 u16 u16")
+                pkt.jdunpack<[number, number, number]>("u8 u8 u8")
 						
 			light.setAll(light.rgb(red, green, blue))
             if (red == 0) 
